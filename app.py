@@ -76,62 +76,56 @@ with col2:
     st.markdown('<div class="header-title">Heart Disease Risk Predictor</div>', unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("📋 **Enter your health metrics below to assess your heart disease risk**")
+st.markdown("📋 **Please provide your health information to get a personalized heart disease risk assessment**")
+st.markdown('<div class="input-section">', unsafe_allow_html=True)
+st.markdown("**Personal Information**")
+col1, col2, col3 = st.columns(3)
 
-# Create tabs for better organization
-tab1, tab2, tab3 = st.tabs(["🏥 Personal Info", "📊 Health Metrics", "⚙️ Advanced"])
+with col1:
+    age = st.slider("👤 Age (years)", 18, 100, 40)
+with col2:
+    sex = st.selectbox("👥 Sex", ["Male", "Female"], format_func=lambda x: "👨 Male" if x == "Male" else "👩 Female")
+    sex = sex[0]  # Convert to M/F
+with col3:
+    st.info(f"**Age:** {age} years")
 
-with tab1:
-    st.markdown('<div class="input-section">', unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        age = st.slider("👤 Age (years)", 18, 100, 40)
-    with col2:
-        sex = st.selectbox("👥 Sex", ["Male", "Female"], format_func=lambda x: "👨 Male" if x == "Male" else "👩 Female")
-        sex = sex[0]  # Convert to M/F
-    with col3:
-        st.info(f"**Age:** {age} years")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("---")
 
-with tab2:
-    st.markdown('<div class="input-section">', unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("**Blood Pressure & Cholesterol**")
-        resting_bp = st.slider("🩸 Resting Blood Pressure (mm Hg)", 80, 200, 120)
-        cholesterol = st.number_input("🧬 Cholesterol (mg/dL)", 100, 600, 200)
-    
-    with col2:
-        st.markdown("**Heart Activity**")
-        max_hr = st.slider("💓 Max Heart Rate", 60, 220, 150)
-        oldpeak = st.slider("📈 Oldpeak (ST Depression)", 0.0, 6.0, 1.0)
-    
-    st.markdown("**Additional Metrics**")
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        chest_pain = st.selectbox("🫀 Chest Pain Type", ["ASY", "ATA", "NAP", "TA"])
-    with col2:
-        fasting_bs = st.selectbox("🍽️ Fasting Blood Sugar > 120 mg/dL", [0, 1], format_func=lambda x: "No" if x == 0 else "Yes")
-    with col3:
-        exercise_angina = st.selectbox("🏃 Exercise-Induced Angina", ["N", "Y"], format_func=lambda x: "No" if x == "N" else "Yes")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+# Health Metrics Section
+st.markdown("**Blood Pressure & Cholesterol**")
+col1, col2 = st.columns(2)
 
-with tab3:
-    st.markdown('<div class="input-section">', unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        resting_ecg = st.selectbox("📊 Resting ECG", ["Normal", "ST", "LVH"])
-    with col2:
-        st_slope = st.selectbox("📉 ST Slope", ["Up", "Flat", "Down"])
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+with col1:
+    resting_bp = st.slider("🩸 Resting Blood Pressure (mm Hg)", 80, 200, 120)
+    cholesterol = st.number_input("🧬 Cholesterol (mg/dL)", 100, 600, 200)
+
+with col2:
+    st.markdown("**Heart Activity**")
+    max_hr = st.slider("💓 Max Heart Rate", 60, 220, 150)
+    oldpeak = st.slider("📈 Oldpeak (ST Depression)", 0.0, 6.0, 1.0)
+
+st.markdown("**Additional Metrics**")
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    chest_pain = st.selectbox("🫀 Chest Pain Type", ["ASY", "ATA", "NAP", "TA"])
+with col2:
+    fasting_bs = st.selectbox("🍽️ Fasting Blood Sugar > 120 mg/dL", [0, 1], format_func=lambda x: "No" if x == 0 else "Yes")
+with col3:
+    exercise_angina = st.selectbox("🏃 Exercise-Induced Angina", ["N", "Y"], format_func=lambda x: "No" if x == "N" else "Yes")
+
+st.markdown("---")
+
+# Advanced Section
+st.markdown("**Advanced Settings**")
+col1, col2 = st.columns(2)
+
+with col1:
+    resting_ecg = st.selectbox("📊 Resting ECG", ["Normal", "ST", "LVH"])
+with col2:
+    st_slope = st.selectbox("📉 ST Slope", ["Up", "Flat", "Down"])
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Prediction section
 st.markdown("---")
@@ -237,6 +231,7 @@ st.markdown("""
 
 
 
+#.venv\Scripts\streamlit run app.py
 #.venv\Scripts\streamlit run app.py
 
 #git init
